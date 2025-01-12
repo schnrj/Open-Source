@@ -5,7 +5,7 @@ public:
 
         int o = 0, c = 0, w = 0;
 
-        // Forward pass
+        
         for (int i = 0; i < s.size(); i++) {
             if (locked[i] == '0') w++;
             else if (s[i] == '(') o++;
