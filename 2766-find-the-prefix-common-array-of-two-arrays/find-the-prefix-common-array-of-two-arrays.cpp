@@ -1,19 +1,12 @@
 class Solution {
 public:
-    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
-        vector<int>v(A.size()+1,0);
-        vector<int>sachu;
-        for(int i=0;i<A.size();i++){
-            v[A[i]]++;
-            v[B[i]]++;
-            int ans=0;
-            for(int i=0;i<v.size();i++){
-                if(v[i]>1){
-                    ans++;
-                }
-            }
-            sachu.push_back(ans);
-        }
-        return sachu;
+     vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+    int n = A.size();
+    vector<int> res(n), cnt(51);
+    for (int i = 0; i < n; ++i) {
+        res[i] = (++cnt[A[i]] == 2 ? 1 : 0) + (++cnt[B[i]] == 2 ? 1 : 0);
+        if( i > 0)  res[i] += res[i - 1];
     }
+    return res;
+}
 };
