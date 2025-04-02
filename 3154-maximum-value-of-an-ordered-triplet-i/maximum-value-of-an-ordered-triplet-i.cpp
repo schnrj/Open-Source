@@ -1,21 +1,22 @@
 class Solution {
+    #define ll long long
 public:
     long long maximumTripletValue(vector<int>& nums) {
-        long long x=INT_MIN;
-        for(int i=0;i<nums.size()-2;i++){
-            for(int j=i+1;j<nums.size()-1;j++){
-                for(int k=j+1;k<nums.size();k++){
-                    
-                    long long y=((long long)nums[i]-(long long)nums[j])*(long long)nums[k];
-                    // long long y=(long long)(nums[i]*nums[k])-(long long)(nums[j]*nums[k]);
-                    if(y<0){
-                        y=0;
-                    }
-                    x=max(x,y);
-
-                }
-            }
+        int n =  nums.size();
+       
+        vector<int> right_max(n);
+        int max_val = nums[n-1];
+        for(int i=n-2;i>0;--i){
+            right_max[i] = max_val;
+            max_val = max(max_val,nums[i]);
         }
-        return x;
+
+        ll max_triplet = 0;
+        max_val = nums[0];
+        for(int i=1;i<n-1;++i){
+            max_triplet = max<ll>(max_triplet,(1LL*max_val-nums[i])*right_max[i]);
+            max_val = max(max_val,nums[i]);
+        }
+        return max_triplet;
     }
 };
