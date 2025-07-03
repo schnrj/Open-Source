@@ -53,3 +53,5 @@ public:
         return (total_combinations - invalid_combinations + MOD) % MOD;
     }
 };
+
+// do this question again after one month so that you will be clear of all doubts and make your own intuitions
