@@ -13,21 +13,21 @@ public:
                 currentCapacity++;
             }
             
-			// Last Bus
+			
             if(i == n - 1){
                 j--;
-                // If last bus has some seats left, then reach station at last bus departure time.
+              
                 if(currentCapacity < totalCapacity){
                     int time = buses[i];
-                    while(j >= 0 && time == passengers[j]){ // if time clashes with other passenger, reach 1 minute early
+                    while(j >= 0 && time == passengers[j]){ 
                         time--, j--;
                     }
                     return time;
                 }else{
-                    // If bus is full, then we have to reach before the last person which is on board
+                    
                     int time = passengers[j] - 1;
                     j--;
-                    while(j >= 0 && time == passengers[j]){  // if time clashes with other passenger, reach 1 minute early
+                    while(j >= 0 && time == passengers[j]){  
                         time--, j--;
                     }
                     return time;
