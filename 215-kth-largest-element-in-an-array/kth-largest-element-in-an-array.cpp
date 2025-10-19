@@ -1,24 +1,58 @@
 class Solution {
 public:
-    int findKthLargest(vector<int>& nums, int k) {
-         
-
-         if(nums.size()<k) return -1;
-        priority_queue<int,vector<int>,greater<int>>pq;
-        for(int i=0;i<nums.size();i++){
+      int partition_algo(vector<int>& nums, int L, int R) {
+        
+        int P = nums[L];
+        int i = L+1;
+        int j = R; 
+        
+        while(i <= j) {
             
-            pq.push(nums[i]);
-            if(pq.size()>k){
-                pq.pop();
+            if(nums[i] < P && nums[j] > P) {
+                swap(nums[i], nums[j]);
+                i++;
+                j--;
             }
+            
+            if(nums[i] >= P) {
+                i++;
+            }
+            
+            if(nums[j] <= P) {
+                j--;
+            }
+            
         }
-         
-        // // int count=0;
-        // while(pq.size()!=1){
-        // //   cout<<pq.top()<<" ";
-        //   pq.pop();
-        // }
-        return pq.top();
-        // return -1;
+        
+        swap(nums[L], nums[j]);
+        return j; 
+    }
+    
+    int findKthLargest(vector<int>& nums, int k) {
+        int n = nums.size();
+        
+        int L = 0;
+        int R = n-1;
+        
+        int pivot_idx = 0;
+        
+       
+        while(true) {
+            
+             pivot_idx = partition_algo(nums, L, R);
+            
+            if(pivot_idx == k-1) {
+                break;
+            } else if(pivot_idx > k-1) { 
+                R = pivot_idx - 1;
+            } else {
+                L = pivot_idx + 1;
+            }
+            
+        }
+        
+        
+        return nums[pivot_idx];
+        
     }
 };
